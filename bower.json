@@ -1,0 +1,26 @@
+{
+  "name": "purescript-run-supply",
+  "description": "Supply of values",
+  "main": "index.js",
+  "authors": [
+    "Hardy Jones <jones3.hardy@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "purescript-psci-support": "^4.0.0",
+    "purescript-effect": "^2.0.0",
+    "purescript-console": "^4.1.0",
+    "purescript-spec": "^3.0.0"
+  },
+  "dependencies": {
+    "purescript-run": "^2.0.0"
+  }
+}
