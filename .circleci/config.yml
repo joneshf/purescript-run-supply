@@ -1,5 +1,6 @@
 ---
 version: 2
+
 jobs:
   build:
     docker:
@@ -24,3 +25,9 @@ jobs:
             - bower_components
             - node_modules
             - output
+
+workflows:
+  version: 2
+  base:
+    jobs:
+      - build
