@@ -1,4 +1,5 @@
 BOWER := npx bower
+BOWER_FLAGS ?=
 COMPILE_FLAGS ?= 
 DEPENDENCIES := 'bower_components/purescript-*/src/**/*.purs'
 NODE := node
@@ -33,7 +34,7 @@ $(foreach test, $(TESTS), $(eval $(call TEST_OUTPUT_RULE, $(test))))
 .DEFAULT_GOAL := build
 
 bower_components: bower.json node_modules
-	$(BOWER) install
+	$(BOWER) $(BOWER_FLAGS) install
 	touch $@
 
 .PHONY: build

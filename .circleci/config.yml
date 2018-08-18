@@ -14,6 +14,8 @@ jobs:
           name: Restoring cache
       - run:
           command: make test
+          environment:
+            BOWER_FLAGS: --allow-root
           name: Test
       - save_cache:
           key: v1-{{ checksum "package.json" }}-{{ checksum "bower.json" }}
