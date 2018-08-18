@@ -1,0 +1,24 @@
+---
+version: 2
+jobs:
+  build:
+    docker:
+      - image: node:10.9.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-{{ checksum "package.json" }}-{{ checksum "bower.json" }}
+            - v1-{{ checksum "package.json" }}-
+            - v1-
+          name: Restoring cache
+      - run:
+          command: make test
+          name: Test
+      - save_cache:
+          key: v1-{{ checksum "package.json" }}-{{ checksum "bower.json" }}
+          name: Making cache
+          paths:
+            - bower_components
+            - node_modules
+            - output
