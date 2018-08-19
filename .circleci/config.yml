@@ -14,13 +14,16 @@ jobs:
             - v1-
           name: Restoring cache
       - run:
-          command: bazel test //...
-          name: Test
+          command: bazel build //...
+          name: Compile
       - save_cache:
           key: v1-{{ checksum "WORKSPACE" }}-{{ checksum "BUILD" }}
           name: Making cache
           paths:
             - ~/.cache/bazel
+      - run:
+          command: bazel test //...
+          name: Test
 
 workflows:
   version: 2
