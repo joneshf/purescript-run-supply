@@ -1,0 +1,2 @@
+build --define ci=circleci
+test --define ci=circleci

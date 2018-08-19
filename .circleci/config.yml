@@ -14,7 +14,7 @@ jobs:
             - v1-
           name: Restoring cache
       - run:
-          command: bazel build //...
+          command: bazel --bazelrc .circleci/.bazelrc build //...
           name: Compile
       - save_cache:
           key: v1-{{ checksum "WORKSPACE" }}-{{ checksum "BUILD" }}
@@ -22,7 +22,7 @@ jobs:
           paths:
             - ~/.cache/bazel
       - run:
-          command: bazel test //...
+          command: bazel --bazelrc .circleci/.bazelrc test //...
           name: Test
 
 workflows:

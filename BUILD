@@ -67,17 +67,37 @@ test_dependencies = [
     "@strings//:pkg",
 ]
 
+# Settings
+
+config_setting(
+    name = "circleci",
+    define_values = {
+        "ci": "circleci",
+    },
+)
+
+compiler_flags = select({
+    ":circleci": [
+        "+RTS",
+        "-N2",
+        "-RTS",
+    ],
+    "//conditions:default": [],
+})
+
 # Targets
 
 # Missing targets: format, repl, watch
 
 purescript_lib(
+    compiler_flags = compiler_flags,
     deps = source_dependencies,
     name = "run-supply",
     srcs = glob(["src/**/*.purs"]),
 )
 
 purescript_test(
+    compiler_flags = compiler_flags,
     deps = source_dependencies + test_dependencies,
     name = "run-supply-test",
     srcs = glob(["src/**/*.purs", "test/**/*.purs"]),
