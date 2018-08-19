@@ -4,6 +4,9 @@
 
 # Created by https://www.gitignore.io/api/vim,osx,node,emacs,linux,bower,macos,windows,purescript,sublimetext,visualstudiocode
 
+### Bazel ###
+/bazel-*
+
 ### Bower ###
 bower_components
 .bower-cache

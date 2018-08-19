@@ -4,28 +4,26 @@ version: 2
 jobs:
   build:
     docker:
-      - image: node:10.9.0
+      - image: insready/bazel
     steps:
       - checkout
       - restore_cache:
           keys:
-            - v1-{{ checksum "package.json" }}-{{ checksum "bower.json" }}
-            - v1-{{ checksum "package.json" }}-
+            - v1-{{ checksum "WORKSPACE" }}-{{ checksum "BUILD" }}
+            - v1-{{ checksum "WORKSPACE" }}-
             - v1-
           name: Restoring cache
       - run:
-          command: make test
-          environment:
-            BOWER_FLAGS: --allow-root
-            COMPILE_FLAGS: +RTS -N2 -RTS
-          name: Test
+          command: bazel --bazelrc .circleci/.bazelrc build //...
+          name: Compile
       - save_cache:
-          key: v1-{{ checksum "package.json" }}-{{ checksum "bower.json" }}
+          key: v1-{{ checksum "WORKSPACE" }}-{{ checksum "BUILD" }}
           name: Making cache
           paths:
-            - bower_components
-            - node_modules
-            - output
+            - ~/.cache/bazel
+      - run:
+          command: bazel --bazelrc .circleci/.bazelrc test //...
+          name: Test
 
 workflows:
   version: 2
