@@ -5,6 +5,7 @@ DEPENDENCIES := 'bower_components/purescript-*/src/**/*.purs'
 NODE := node
 NPM := npm
 OUTPUT := output
+PSA := npx psa
 PSCID := npx pscid
 PURS := npx psa
 PURTY := npx purty
@@ -19,12 +20,12 @@ TEST_OUTPUTS := $(patsubst $(TEST).%.purs,$(OUTPUT)/%/index.js,$(subst /,.,$(TES
 
 define SRC_OUTPUT_RULE
 $(patsubst $(SRC).%.purs,$(OUTPUT)/%/index.js,$(subst /,.,$(1))): $(1)
-	$(PURS) compile $(COMPILE_FLAGS) $(DEPENDENCIES) $(SRCS)
+	$(PSA) compile $(COMPILE_FLAGS) $(DEPENDENCIES) $(SRCS)
 endef
 
 define TEST_OUTPUT_RULE
 $(patsubst $(TEST).%.purs,$(OUTPUT)/%/index.js,$(subst /,.,$(1))): $(1)
-	$(PURS) compile $(COMPILE_FLAGS) $(DEPENDENCIES) $(SRCS) $(TESTS)
+	$(PSA) compile $(COMPILE_FLAGS) $(DEPENDENCIES) $(SRCS) $(TESTS)
 endef
 
 $(foreach source, $(SRCS), $(eval $(call SRC_OUTPUT_RULE, $(source))))
